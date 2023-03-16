@@ -1,24 +1,29 @@
-# README
+# Sinaptia CRM
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+CRM made with Ruby on Rails and Tailwind CSS
 
-Things you may want to cover:
+## Setup instructions
 
-* Ruby version
+Clone this repository and install dependencies
 
-* System dependencies
+```ruby
+bundle install
+```
 
-* Configuration
+Set up a postgresql database, db configuration can be found in config/database.yml, and then run migrations with:
 
-* Database creation
+```ruby
+rails db:migrate
+```
 
-* Database initialization
+This projects works with the 'standardrb' gem, you can run standard with:
 
-* How to run the test suite
+```ruby
+yarn lint
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+and fix errors with:
 
-* Deployment instructions
-
-* ...
+```ruby
+yarn lint:fix
+```
