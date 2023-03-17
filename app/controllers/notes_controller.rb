@@ -1,9 +1,10 @@
 class NotesController < ApplicationController
+  before_action :set_client
   before_action :set_note, only: %i[show edit update destroy]
 
   # GET /notes or /notes.json
   def index
-    @notes = Note.all
+    @notes = @client.notes
   end
 
   # GET /notes/1 or /notes/1.json
@@ -12,7 +13,7 @@ class NotesController < ApplicationController
 
   # GET /notes/new
   def new
-    @note = Note.new
+    @note = @client.notes.build
   end
 
   # GET /notes/1/edit
@@ -21,9 +22,9 @@ class NotesController < ApplicationController
 
   # POST /notes or /notes.json
   def create
-    @note = Note.new(note_params.merge(user: current_user))
+    @note = @client.notes.build(note_params.merge(user: current_user))
     if @note.save
-      redirect_to notes_path, notice: "Note was successfully created."
+      redirect_to client_notes_path, notice: "Note was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +33,7 @@ class NotesController < ApplicationController
   # PATCH/PUT /notes/1 or /notes/1.json
   def update
     if @note.update(note_params)
-      redirect_to notes_path, notice: "Note was successfully updated."
+      redirect_to client_notes_path, notice: "Note was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -41,18 +42,22 @@ class NotesController < ApplicationController
   # DELETE /notes/1 or /notes/1.json
   def destroy
     @note.destroy
-    redirect_to notes_path, notice: "Note was successfully destroyed."
+    redirect_to client_notes_path(@client), notice: "Note was successfully destroyed."
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_note
-    @note = Note.find(params[:id])
+    @note = @client.notes.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def note_params
     params.require(:note).permit(:body, :client_id, :user_id)
+  end
+
+  def set_client
+    @client = Client.find(params[:client_id])
   end
 end
