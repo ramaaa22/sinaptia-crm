@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: %i[ show edit update destroy ]
+  before_action :set_client, only: %i[show edit update destroy]
 
   # GET /clients or /clients.json
   def index
@@ -24,35 +24,36 @@ class ClientsController < ApplicationController
     @client = Client.new(client_params)
 
     if @client.save
-      redirect_to clients_path, notice: "Client was successfully created." 
+      redirect_to clients_path, notice: "Client was successfully created."
     else
-      render :new, status: :unprocessable_entity 
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /clients/1 or /clients/1.json
   def update
     if @client.update(client_params)
-      redirect_to clients_path, notice: "Client was successfully updated." 
+      redirect_to clients_path, notice: "Client was successfully updated."
     else
-      render :edit, status: :unprocessable_entity 
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /clients/1 or /clients/1.json
   def destroy
     @client.destroy
-    redirect_to clients_path, notice: "Client was successfully destroyed." 
+    redirect_to clients_path, notice: "Client was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_client
-      @client = Client.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def client_params
-      params.require(:client).permit(:name, :email, :location)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_client
+    @client = Client.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def client_params
+    params.require(:client).permit(:name, :email, :location)
+  end
 end
