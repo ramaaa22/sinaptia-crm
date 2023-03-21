@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_193333) do
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_identities_on_user_id"
   end
-  
+
   create_table "clients_tags", id: false, force: :cascade do |t|
     t.bigint "client_id", null: false
     t.bigint "tag_id", null: false

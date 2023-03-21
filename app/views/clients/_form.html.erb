@@ -28,7 +28,7 @@
 
   <div>
     <%= form.label :tag_ids, style: "display: block" %>
-    <%= form.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {:include_hidden => false, checked: client.tags.map(&:id)}) %>
+    <%= form.collection_check_boxes(:tag_ids, Tag.all, :id, :name, { include_hidden: false, checked: client.tags.map(&:id) }) %>
   </div>
 
   <div>

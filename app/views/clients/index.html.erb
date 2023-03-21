@@ -1,14 +1,56 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Clients</h1>
-
-<div id="clients">
-  <% @clients.each do |client| %>
-    <%= render client %>
-    <p>
-      <%= link_to "Show this client", client %>
-    </p>
-  <% end %>
+<div class="flex flex-row justify-between items-center p-3 my-4">
+  <h2 class="text-gray-700 dark:text-white font-semibold text-3xl">Clients</h2>
+  <%= link_to "New client", new_client_path, class: "btn" %>
 </div>
 
-<%= link_to "New client", new_client_path %>
+<div id="clients">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-neutral-800 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">Name</th>
+          <th scope="col" class="px-6 py-3">Email</th>
+          <th scope="col" class="px-6 py-3">Location</th>
+          <th scope="col" class="px-6 py-3">Status</th>
+          <th scope="col" class="px-6 py-3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @clients.each do |client| %>
+          <tr
+            class="bg-white border-b dark:bg-zinc-500 dark:border-gray-700 dark:text-white"
+            id="<%= dom_id client %>"
+          >
+            <td
+              scope="row"
+              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            >
+              <%= client.name %>
+            </td>
+            <td class="px-6 py-4"><%= client.email %></td>
+            <td class="px-6 py-4"><%= client.location %></td>
+            <td class="px-6 py-4">
+              <% client.tags.each do |tag| %>
+                <span>
+                  <%= link_to tag.name,
+                  tag,
+                  class:
+                    "inline-flex items-center px-2 py-1 m-1 rounded text-sm font-medium text-gray-800 bg-gray-200 dark:bg-neutral-800 dark:text-gray-300" %>
+                </span>
+              <% end %>
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex flex-row">
+                <%= link_to "Edit", edit_client_path(client), class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
+                <%= button_to "Delete", client, method: :delete, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
+                <%= link_to "Show", client, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

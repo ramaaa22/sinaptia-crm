@@ -6,7 +6,7 @@
   <% @notes.each do |note| %>
     <%= render note %>
     <p>
-      <%= link_to "Show this note", client_note_path(@client,note), method: :get %>
+      <%= link_to "Show this note", client_note_path(@client, note), method: :get %>
     </p>
   <% end %>
 </div>
