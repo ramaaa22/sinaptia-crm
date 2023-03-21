@@ -1,3 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.btn {
+    @apply bg-sinaptia-2 text-white font-semibold p-2 rounded-lg hover:bg-sinaptia-3 transition;
+  }
