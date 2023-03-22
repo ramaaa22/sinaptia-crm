@@ -43,7 +43,7 @@
               <div class="flex flex-row">
                 <%= link_to "Edit", edit_client_path(client), class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
                 <%= button_to "Delete", client, method: :delete, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
-                <%= link_to "Show", client, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
+                <%= link_to "Notes (#{client.notes.length})", client_notes_path(client), class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
               </div>
             </td>
           </tr>
