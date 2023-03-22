@@ -1,9 +1,13 @@
-<h1>Editing tag</h1>
+<div class="m-6">
+  <div>
+    <%= link_to "< Back to tags", tags_path, class: "text-sinaptia-2 font-medium"  %>
+  </div>
 
-<%= render "form", tag: @tag %>
+  <div class="form-tables">
+    <h2 class="form-title">Edit tag</h2>
 
-<br>
+    <%= render "form", tag: @tag %>
 
-<div>
-  <%= link_to "Show this tag", @tag %> | <%= link_to "Back to tags", tags_path %>
+    <br>
+  </div>
 </div>

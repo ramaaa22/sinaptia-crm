@@ -11,11 +11,11 @@
     </div>
   <% end %>
   <div>
-    <%= form.label :body, style: "display: block" %>
-    <%= form.text_area :body %>
+    <%= form.label :body, class: "form-label" %>
+    <%= form.text_area :body, class: "form-input" %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn w-full" %>
   </div>
 <% end %>

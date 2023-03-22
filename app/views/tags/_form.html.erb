@@ -13,11 +13,11 @@
   <% end %>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-input" %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn w-full" %>
   </div>
 <% end %>
