@@ -2,10 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-gray-200 dark:bg-gray-300 rounded-lg;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-sinaptia-2 rounded-lg;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-sinaptia-3;
+}
+
 .btn {
-  @apply bg-sinaptia-2 text-white font-semibold p-2 rounded-lg hover:bg-sinaptia-3 transition;
+  @apply bg-sinaptia-2 text-white text-center cursor-pointer font-semibold p-2 rounded-lg hover:bg-sinaptia-3 transition;
 }
 
 .nav-link {
   @apply block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700;
+}
+
+.form-label {
+  @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
+}
+
+.form-input {
+  @apply my-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sinaptia-2 focus:border-sinaptia-2 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-700 dark:placeholder-gray-400 dark:text-white;
+}
+
+.form-tables {
+  @apply w-full p-4 my-6 mx-auto bg-white rounded-lg shadow dark:border sm:max-w-lg dark:bg-zinc-500 dark:border-zinc-700;
+}
+
+.form-title {
+  @apply text-xl text-gray-900 dark:text-white my-2;
 }

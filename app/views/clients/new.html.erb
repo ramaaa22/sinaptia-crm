@@ -1,7 +1,16 @@
-<h1>New client</h1>
+<div class="m-6">
 
-<%= render "form", client: @client %>
-
-<br />
-
-<div><%= link_to "Back to clients", clients_path %></div>
+  <div>
+    <%= link_to "< Back to clients", clients_path, class: "text-sinaptia-2 font-medium" %>
+  </div>
+  
+  <div class="form-tables">
+    
+    <h2 class="form-title">New client</h2>
+    
+    <%= render "form", client: @client %>
+    
+    <br />
+    
+  </div>
+</div>
