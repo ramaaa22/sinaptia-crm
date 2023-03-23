@@ -47,5 +47,10 @@
         <% end %>
       </tbody>
     </table>
+    <%# Pagination %>
+    <div>
+      <span class="text-sm font-normal text-gray-500 dark:text-gray-400"><%= page_entries_info @clients %></span>
+      <%= paginate @clients, left: 1, right: 3 %>
+    </div>
   </div>
 </div>

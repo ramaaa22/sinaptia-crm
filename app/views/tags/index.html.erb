@@ -27,4 +27,8 @@
       <% end %>
     </tbody>
   </table>
+  <div>
+    <span class="text-sm font-normal text-gray-500 dark:text-gray-400"><%= page_entries_info @tags %></span>
+    <%= paginate @tags, left: 1, right: 3 %>
+  </div>
 </div>

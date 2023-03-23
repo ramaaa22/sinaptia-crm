@@ -55,6 +55,9 @@ gem "omniauth-rails_csrf_protection"
 # Gem to validate emails
 gem "email_validator"
 
+# Pagination
+gem "kaminari"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
