@@ -1,12 +1,30 @@
-<h1>Tags</h1>
+<div class="flex flex-row justify-between items-center p-3 my-4">
+  <h2 class="text-gray-700 dark:text-white font-semibold text-3xl">Tags</h2>
+  <%= link_to "New tag", new_tag_path, class: "btn" %>
+</div>
 
-<div id="tags">
-  <% @tags.each do |tag| %>
-    <%= render tag %>
-    <p>
-      <%= link_to "Show this tag", tag %>
-    </p>
-  <% end %>
-  <%= link_to "Create a new tag", new_tag_path %>
-  <%= link_to "Back to clients", clients_path %>
+<div class="relative mb-16 overflow-x-auto shadow-md sm:rounded-lg">
+
+  <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-neutral-800 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="px-6 py-3">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tags.each_with_index do |tag, index| %>
+        <tr class="bg-white border-b dark:bg-zinc-500 dark:border-neutral-800 dark:text-white" id="<%= dom_id tag %>">
+          <td scope="row" class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <div class="flex flex-row items-center justify-between">
+                <p class="px-6 py-4"><%= tag.name %></p>
+                <div class="flex flex-row">
+                  <%= link_to "Edit", edit_tag_path(tag), class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
+                  <%= button_to "Destroy", tag, method: :delete, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
+                </div>
+              </div> 
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
