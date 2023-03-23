@@ -45,11 +45,15 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
+# Gems associated with devise and sign in with google
 gem "devise"
 gem "dotenv-rails"
 gem "omniauth"
 gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
+
+# Gem to validate emails
+gem "email_validator"
 
 # Use Sass to process CSS
 # gem "sassc-rails"
