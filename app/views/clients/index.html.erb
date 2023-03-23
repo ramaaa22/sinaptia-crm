@@ -39,7 +39,7 @@
             <td class="px-6 py-4">
               <div class="flex flex-row">
                 <%= link_to "Edit", edit_client_path(client), class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
-                <%= button_to "Delete", client, method: :delete, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
+                <%= link_to "Delete", client, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
                 <%= link_to "Notes (#{client.notes.length})", client_notes_path(client), class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
               </div>
             </td>

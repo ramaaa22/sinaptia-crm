@@ -19,7 +19,7 @@
                 <p class="px-6 py-4"><%= tag.name %></p>
                 <div class="flex flex-row">
                   <%= link_to "Edit", edit_tag_path(tag), class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
-                  <%= button_to "Destroy", tag, method: :delete, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
+                  <%= link_to "Delete", tag, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
                 </div>
               </div> 
           </td>
