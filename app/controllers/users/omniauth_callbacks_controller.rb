@@ -22,7 +22,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
     elsif @identity.user.blank?
       @user = User.find_or_initialize_by email: @auth.dig("info", "email")
-      if !@user.valid?
+      @user.validate
+      if @user.errors[:email].any?
         redirect_to root_path, notice: t(".successfully_linked") and return
       end
       @user.update(first_name: @auth.dig("info", "first_name"), last_name: @auth.dig("info", "last_name"), password: Devise.friendly_token[0, 20]) if @user.new_record?
