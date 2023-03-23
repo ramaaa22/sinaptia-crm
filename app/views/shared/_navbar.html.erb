@@ -1,12 +1,16 @@
 <% if user_signed_in? %> 
-<nav class="bg-white border-gray-200 px-2 sm:px-4 py-1.5 dark:bg-neutral-800 shadow">
+<nav class="bg-white border-gray-200 px-2 sm:px-4 dark:bg-neutral-800 shadow">
   <div class="container flex flex-wrap items-center justify-between max-w-7xl mx-auto">
     <div class="flex items-center">
       <a href="/">
-        <%= image_tag("sinaptia_logo.svg", class: "w-14 h-14", alt: "sinaptia_logo.svg") %>
+        <%= image_tag("sinaptia_logo.svg", class: "w-16 h-16", alt: "sinaptia_logo.svg") %>
       </a>
     </div>
     <div class="flex items-center md:order-2">
+      <label class="relative inline-flex items-center my-4 mx-3 cursor-pointer">
+        <input type="checkbox" id="dark-toggle-switch" value="" class="sr-only peer">
+        <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 dark:peer-focus:ring-gray-500 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gray-600"></div>
+      </label>      
       <button
         type="button"
         class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
@@ -56,12 +60,12 @@
       </button>
     </div>
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
-      <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-white md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 dark:bg-neutral-800 dark:border-gray-700">
-        <li>
-          <%= link_to "Clients", clients_path, class: "nav-link" %>
+      <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-white md:flex-row md:space-x-8 md:items-center md:h-16 md:mt-0 md:p-0 md:text-sm md:font-medium md:border-0 dark:bg-neutral-800 dark:border-gray-700">
+        <li class="h-full">
+          <%= link_to "Clients", clients_path, class: "nav-link h-full" %>
         </li>
-        <li>
-          <%= link_to "Tags", tags_path, class: "nav-link" %>
+        <li class="h-full">
+          <%= link_to "Tags", tags_path, class: "nav-link h-full" %>
         </li>
       </ul>
     </div>

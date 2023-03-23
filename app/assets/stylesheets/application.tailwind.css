@@ -5,6 +5,7 @@
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 /* Track */
@@ -27,7 +28,7 @@
 }
 
 .nav-link {
-  @apply block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700;
+  @apply inline-flex items-center py-2 pl-3 pr-4 text-gray-500 rounded hover:bg-gray-100 md:rounded-none md:hover:bg-transparent md:hover:text-gray-700 md:border-transparent md:border-y-2 md:hover:border-b-gray-300 md:p-0 dark:text-gray-400 md:dark:hover:text-white md:dark:hover:border-b-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent;
 }
 
 .form-label {
