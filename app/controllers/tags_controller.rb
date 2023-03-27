@@ -3,7 +3,11 @@ class TagsController < ApplicationController
 
   # GET /tags or /tags.json
   def index
-    @tags = Tag.page(params[:page])
+    if params[:search]
+      @tags = Tag.page(params[:page]).search(params[:search])
+    else
+      @tags = Tag.page(params[:page])
+    end    
   end
 
   # GET /tags/new

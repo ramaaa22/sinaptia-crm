@@ -3,6 +3,11 @@
   <%= link_to "New client", new_client_path, class: "btn" %>
 </div>
 
+<%= form_tag(clients_path, method: :get) do %>
+  <%= render "shared/search", search_fields: 'Name, Email or Location' %>
+<% end %>
+
+
 <div id="clients">
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">

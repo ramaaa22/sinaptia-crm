@@ -3,7 +3,11 @@ class ClientsController < ApplicationController
 
   # GET /clients or /clients.json
   def index
-    @clients = Client.page(params[:page])
+      if params[:search]
+        @clients = Client.page(params[:page]).search(params[:search])
+      else
+        @clients = Client.page(params[:page])
+      end
   end
 
   # GET /clients/new

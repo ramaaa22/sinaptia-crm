@@ -58,6 +58,9 @@ gem "email_validator"
 # Pagination
 gem "kaminari"
 
+# Search gem for postgresql
+gem 'pg_search'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
