@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true, if: :domain_check
 
+  enum role: {default: 0, admin: 1}
+
   private
 
   def domain_check

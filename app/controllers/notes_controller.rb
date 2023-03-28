@@ -1,28 +1,25 @@
 class NotesController < ApplicationController
   before_action :set_client
-  before_action :set_note, only: %i[show edit update destroy]
+  before_action :set_note, only: %i[edit update destroy]
+  before_action :authorize_note, only: %i[edit update destroy]
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   # GET /notes or /notes.json
   def index
-    @notes = @client.notes.order("created_at DESC").page(params[:page])
-  end
-
-  # GET /notes/1 or /notes/1.json
-  def show
+    @notes = policy_scope(@client.notes).order("created_at DESC").page(params[:page])
   end
 
   # GET /notes/new
   def new
     @note = @client.notes.build
-  end
-
-  # GET /notes/1/edit
-  def edit
+    authorize_note
   end
 
   # POST /notes or /notes.json
   def create
     @note = @client.notes.build(note_params.merge(user: current_user))
+    authorize_note
     if @note.save
       redirect_to client_notes_path, notice: "Note was successfully created."
     else
@@ -49,7 +46,7 @@ class NotesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_note
-    @note = @client.notes.find(params[:id])
+    @note = policy_scope(@client.notes).find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
@@ -59,5 +56,9 @@ class NotesController < ApplicationController
 
   def set_client
     @client = Client.find(params[:client_id])
+  end
+
+  def authorize_note
+    authorize(@note)
   end
 end

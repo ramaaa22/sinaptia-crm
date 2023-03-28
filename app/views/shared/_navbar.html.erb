@@ -64,9 +64,11 @@
         <li class="h-full">
           <%= link_to "Clients", clients_path, class: "nav-link h-full" %>
         </li>
-        <li class="h-full">
-          <%= link_to "Tags", tags_path, class: "nav-link h-full" %>
-        </li>
+        <% if policy(:tag).index? %>
+          <li class="h-full">
+            <%= link_to "Tags", tags_path, class: "nav-link h-full" %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>

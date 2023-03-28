@@ -1,27 +1,27 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: %i[show edit update destroy]
+  before_action :set_client, only: %i[edit update destroy]
+  before_action :authorize_client, only: %i[edit update destroy]
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
-  # GET /clients or /clients.json
+  # GET /clients
   def index
-      if params[:search]
-        @clients = Client.page(params[:page]).search(params[:search])
-      else
-        @clients = Client.page(params[:page])
-      end
+    @clients = policy_scope(Client).page(params[:page])
+    if params[:search].present?
+      @clients = @clients.search(params[:search])
+    end
   end
 
   # GET /clients/new
   def new
     @client = Client.new
+    authorize_client
   end
 
-  # GET /clients/1/edit
-  def edit
-  end
-
-  # POST /clients or /clients.json
+  # POST /clients
   def create
     @client = Client.new(client_params)
+    authorize_client
 
     if @client.save
       redirect_to clients_path, notice: "Client was successfully created."
@@ -30,7 +30,7 @@ class ClientsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /clients/1 or /clients/1.json
+  # PATCH/PUT /clients/1
   def update
     if @client.update(client_params)
       redirect_to clients_path, notice: "Client was successfully updated."
@@ -39,7 +39,7 @@ class ClientsController < ApplicationController
     end
   end
 
-  # DELETE /clients/1 or /clients/1.json
+  # DELETE /clients/1
   def destroy
     @client.destroy
     redirect_to clients_path, notice: "Client was successfully destroyed."
@@ -49,11 +49,15 @@ class ClientsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_client
-    @client = Client.find(params[:id])
+    @client = policy_scope(Client).find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def client_params
     params.require(:client).permit(:name, :email, :location, tag_ids: [])
+  end
+
+  def authorize_client
+    authorize(@client)
   end
 end

@@ -59,7 +59,10 @@ gem "email_validator"
 gem "kaminari"
 
 # Search gem for postgresql
-gem 'pg_search'
+gem "pg_search"
+
+# Permissions
+gem "pundit"
 
 # Use Sass to process CSS
 # gem "sassc-rails"

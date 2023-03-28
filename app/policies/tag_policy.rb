@@ -1,0 +1,5 @@
+class TagPolicy < ApplicationPolicy
+  def index?
+    user.admin?
+  end
+end
