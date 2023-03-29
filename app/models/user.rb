@@ -5,9 +5,11 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
   has_many :notes
   has_many :identities
+  belongs_to :company
 
   validates :email, presence: true, if: :domain_check
   validates :first_name, :last_name, presence: true
+  validates :company, presence: true
 
   enum role: {default: 0, admin: 1}
 

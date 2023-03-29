@@ -6,7 +6,10 @@ class ClientsController < ApplicationController
 
   # GET /clients
   def index
-    @clients = policy_scope(Client).page(params[:page])
+    @user = current_user
+    @company = @user.company
+    @clients = policy_scope(Client).where("company = #{@company.id}").page(params[:page])
+    puts @clients
     if params[:search].present?
       @clients = @clients.search(params[:search])
     end
@@ -20,7 +23,7 @@ class ClientsController < ApplicationController
 
   # POST /clients
   def create
-    @client = Client.new(client_params)
+    @client = Client.new(client_params.merge(user: current_user))
     authorize_client
 
     if @client.save
