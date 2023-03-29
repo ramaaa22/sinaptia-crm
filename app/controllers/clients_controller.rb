@@ -8,7 +8,7 @@ class ClientsController < ApplicationController
   def index
     @user = current_user
     @company = @user.company
-    @clients = policy_scope(Client).where("company = #{@company.id}").page(params[:page])
+    @clients = policy_scope(Client).where("company_id = #{@company.id}").page(params[:page])
     puts @clients
     if params[:search].present?
       @clients = @clients.search(params[:search])
@@ -23,7 +23,7 @@ class ClientsController < ApplicationController
 
   # POST /clients
   def create
-    @client = Client.new(client_params.merge(user: current_user))
+    @client = Client.new(client_params.merge(company: current_user.company))
     authorize_client
 
     if @client.save
