@@ -22,6 +22,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_27_135453) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "clients_tags", id: false, force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.bigint "tag_id", null: false
+  end
+
   create_table "identities", force: :cascade do |t|
     t.string "uid"
     t.string "provider"
@@ -32,17 +37,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_27_135453) do
     t.index ["user_id"], name: "index_identities_on_user_id"
   end
 
-  create_table "clients_tags", id: false, force: :cascade do |t|
-    t.bigint "client_id", null: false
-    t.bigint "tag_id", null: false
-  end
-
-  create_table "tags", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-  
   create_table "notes", force: :cascade do |t|
     t.text "body"
     t.bigint "client_id", null: false
@@ -51,6 +45,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_27_135453) do
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_notes_on_client_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
