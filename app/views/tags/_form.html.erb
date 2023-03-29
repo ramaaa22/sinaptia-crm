@@ -1,6 +1,6 @@
 <%= form_with(model: tag) do |form| %>
   <% if tag.errors.any? %>
-    <div style="color: red">
+    <div class="form-error">
       <h2><%= pluralize(tag.errors.count, "error") %>
         prohibited this tag from being saved:</h2>
 
