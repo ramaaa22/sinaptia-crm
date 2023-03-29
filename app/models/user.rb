@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :identities
 
   validates :email, presence: true, if: :domain_check
+  validates :first_name, :last_name, presence: true
 
   enum role: {default: 0, admin: 1}
 
