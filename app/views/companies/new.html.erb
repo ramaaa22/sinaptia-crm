@@ -1,0 +1,14 @@
+<div class="m-6">
+
+  <div>
+    <%= link_to "< Back to companies", companies_path, class: "text-sinaptia-2 font-medium" %>
+  </div>
+  
+  <div class="form-tables">
+    <h2 class="form-title">New company</h2>
+    
+    <%= render "form", company: @company %>
+    
+    <br />
+  </div>
+</div>

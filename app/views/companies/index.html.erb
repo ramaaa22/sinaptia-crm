@@ -1,0 +1,20 @@
+<div>
+  <div class="flex flex-row justify-center items-center p-3 my-4">
+    <h2 class="text-center text-gray-700 dark:text-white font-semibold text-3xl">Join a workspace, or create a new one</h2>
+  </div>
+
+  <div class="form-tables">
+    <%= link_to "New company", new_company_path, class: "btn block my-4" %>
+    
+    <% @companies.each do |company| %>
+    <div class="flex justify-between items-center w-full p-3 my-2 bg-gray-200 dark:bg-zinc-700 text-gray-700 dark:text-white">
+      <div>
+        <p class="font-medium"><%= company.name %></p>
+        <p><%= company.description %></p>
+      </div>
+      <%= link_to "Join", company, data: {turbo_method: :delete, turbo_confirm: 'Are you sure you want to join this workspace?'}, class: "btn block" %>
+    </div>
+    <% end %>
+  </div>
+
+</div>
