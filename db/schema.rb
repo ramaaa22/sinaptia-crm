@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_27_135453) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_30_162610) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,11 +20,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_27_135453) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_clients_on_company_id"
   end
 
   create_table "clients_tags", id: false, force: :cascade do |t|
     t.bigint "client_id", null: false
     t.bigint "tag_id", null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "identities", force: :cascade do |t|
@@ -51,6 +59,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_27_135453) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_tags_on_company_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,11 +74,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_27_135453) do
     t.string "first_name"
     t.string "last_name"
     t.integer "role", default: 0
+    t.bigint "company_id"
+    t.boolean "active", default: true
+    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "clients", "companies"
   add_foreign_key "identities", "users"
   add_foreign_key "notes", "clients"
   add_foreign_key "notes", "users"
+  add_foreign_key "tags", "companies"
+  add_foreign_key "users", "companies"
 end

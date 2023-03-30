@@ -32,7 +32,7 @@
 }
 
 .form-label {
-  @apply inline-block mb-2 text-sm font-medium text-gray-900 dark:text-white;
+  @apply inline-block text-sm font-medium text-gray-900 dark:text-white;
 }
 
 .form-input {

@@ -61,6 +61,11 @@
     </div>
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
       <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-white md:flex-row md:space-x-8 md:items-center md:h-16 md:mt-0 md:p-0 md:text-sm md:font-medium md:border-0 dark:bg-neutral-800 dark:border-gray-700">
+        <% if policy(:user).index? %>
+          <li class="h-full">
+            <%= link_to "Users", users_path, class: "nav-link h-full" %>
+          </li>
+        <% end %>
         <li class="h-full">
           <%= link_to "Clients", clients_path, class: "nav-link h-full" %>
         </li>
