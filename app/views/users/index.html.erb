@@ -1,0 +1,55 @@
+<div class="flex flex-row justify-between items-center p-3 my-4">
+  <h2 class="text-gray-700 dark:text-white font-semibold text-3xl">Users</h2>
+  <%= link_to "New user", new_user_path, class: "btn" %>
+</div>
+
+<%= form_tag(users_path, method: :get) do %>
+  <%= render "shared/search", search_fields: 'Email, First Name, Last Name' %>
+<% end %>
+
+<div id="clients">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-neutral-800 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">Email</th>
+          <th scope="col" class="px-6 py-3">First Name</th>
+          <th scope="col" class="px-6 py-3">Last Name</th>
+          <th scope="col" class="px-6 py-3">Admin</th>
+          <th scope="col" class="px-6 py-3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr
+            class="bg-white border-b dark:bg-zinc-500 dark:border-neutral-800 dark:text-white"
+            id="<%= dom_id user %>"
+          >
+            <td
+              scope="row"
+              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            >
+              <%= user.email %>
+            </td>
+            <td class="px-6 py-4"><%= user.first_name %></td>
+            <td class="px-6 py-4"><%= user.last_name %></td>
+            <td class="px-6 py-4 uppercase"><%= user.admin? %></td>
+            <td class="px-6 py-4">
+              <% if policy(user).destroy? %>
+                <div class="flex flex-row">
+                  <%= link_to "Edit", edit_user_path(user), class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
+                  <%= link_to "Delete", user_path(user), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
+                </div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%# Pagination %>
+    <div class="p-2 dark:bg-neutral-800">
+      <span class="text-sm font-normal text-gray-500 dark:text-gray-400"><%= page_entries_info @users %></span>
+      <%= paginate @users, left: 1, right: 3 %>
+    </div>
+  </div>
+</div>

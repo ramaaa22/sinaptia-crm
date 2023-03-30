@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  include PgSearch::Model
+  pg_search_scope :search, against: [:email, :first_name, :last_name], using: {tsearch: {prefix: true}}
+
   APPROVED_DOMAINS = ["sinaptia.dev"]
 
   devise :database_authenticatable, :registerable,
