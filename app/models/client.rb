@@ -7,6 +7,12 @@ class Client < ApplicationRecord
   belongs_to :company
 
   validates :name, :email, :location, presence: true
-  validates :name, :email, uniqueness: true
+  validates :name, :email, uniqueness: {scope: :company_id}
   validates :email, email: true
+
+  scope :per_company, ->(company) { where("company_id = ?", company) }
+
+  def belongs_company?(id)
+    company.id == id
+  end
 end

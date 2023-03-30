@@ -1,15 +1,13 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[edit update destroy]
   before_action :authorize_client, only: %i[edit update destroy]
+  before_action :set_company, only: %i[index]
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
 
   # GET /clients
   def index
-    @user = current_user
-    @company = @user.company
-    @clients = policy_scope(Client).where("company_id = #{@company.id}").page(params[:page])
-    puts @clients
+    @clients = policy_scope(Client).per_company(@company).page(params[:page])
     if params[:search].present?
       @clients = @clients.search(params[:search])
     end
@@ -53,6 +51,8 @@ class ClientsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_client
     @client = policy_scope(Client).find(params[:id])
+  rescue ActiveRecord::RecordNotFound => e
+    redirect_to clients_path
   end
 
   # Only allow a list of trusted parameters through.
@@ -62,5 +62,9 @@ class ClientsController < ApplicationController
 
   def authorize_client
     authorize(@client)
+  end
+
+  def set_company
+    @company = current_user.company
   end
 end
