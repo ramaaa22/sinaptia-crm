@@ -1,0 +1,33 @@
+<%= form_with(model: user) do |form| %>
+  <%= render "users/shared/error_messages", resource: user %>
+
+  <% if user.new_record? %>
+    <div>
+      <%= form.label :email, class:"form-label" %>
+      <%= form.email_field :email, autofocus: true, class:"form-input" %>
+    </div>
+    
+    <div>
+      <%= form.label :password, class:"form-label" %>
+      <%= form.password_field :password, class:"form-input" %>
+    </div>
+  <% end%>
+  
+  <div>
+    <%= form.label :first_name, class: "form-label" %>
+    <%= form.text_field :first_name, class: "form-input" %>
+  </div>
+  
+  <div>
+    <%= form.label :last_name, class: "form-label" %>
+    <%= form.text_field :last_name, class: "form-input" %>
+  </div>
+  
+  <div class="flex justify-center items-center my-2">
+    <%= form.label :role, 'Admin', class: "form-label m-2" %>
+    <%= form.check_box :role, { checked: user.admin? }, 'admin', 'default'  %>
+  </div>
+
+<%= form.submit class: "btn my-2 w-full" %>
+
+<% end %>
