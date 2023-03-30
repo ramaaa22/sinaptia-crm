@@ -63,8 +63,4 @@ class ClientsController < ApplicationController
   def authorize_client
     authorize(@client)
   end
-
-  def set_company
-    @company = current_user.company
-  end
 end

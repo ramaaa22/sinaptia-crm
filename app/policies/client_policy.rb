@@ -1,4 +1,8 @@
 class ClientPolicy < ApplicationPolicy
+  def index?
+    record.belongs_company?(user.company_id)
+  end
+
   def edit?
     super && record.belongs_company?(user.company_id)
   end
@@ -9,9 +13,5 @@ class ClientPolicy < ApplicationPolicy
 
   def destroy?
     edit?
-  end
-
-  def index?
-    record.belongs_company?(user.company_id)
   end
 end

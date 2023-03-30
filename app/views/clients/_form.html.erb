@@ -29,7 +29,7 @@
   <div>
     <%= form.label :tag_ids, "Status", class: "form-label" %>
     <div class="flex flex-col mt-2 mb-4 h-[100px] overflow-y-scroll form-input">
-      <%= form.collection_check_boxes(:tag_ids, Tag.all, :id, :name, { include_hidden: false, checked: client.tags.map(&:id) })  do |b| %>
+      <%= form.collection_check_boxes(:tag_ids, Tag.per_company(@company), :id, :name, { include_hidden: false, checked: client.tags.map(&:id) })  do |b| %>
         <div class="flex flex-row items-center">
           <%= b.check_box %>
           <p class="m-1"><%= b.text %></p>

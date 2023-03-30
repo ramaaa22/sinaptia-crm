@@ -1,12 +1,13 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: %i[edit update destroy]
   before_action :authorize_tag, only: %i[edit update destroy]
+  before_action :set_company
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
 
   # GET /tags
   def index
-    @tags = policy_scope(Tag).page(params[:page])
+    @tags = policy_scope(Tag).per_company(@company).page(params[:page])
     if params[:search].present?
       @tags = @tags.search(params[:search])
     end
@@ -20,7 +21,7 @@ class TagsController < ApplicationController
 
   # POST /tags
   def create
-    @tag = Tag.new(tag_params)
+    @tag = Tag.new(tag_params.merge(company: @company))
     authorize_tag
     if @tag.save
       redirect_to tags_url, notice: "Tag was successfully created."
