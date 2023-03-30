@@ -1,0 +1,59 @@
+class UsersController < ApplicationController
+  before_action :set_user, only: %i[edit update destroy]
+  before_action :authorize_user, only: %i[edit update destroy]
+  after_action :verify_authorized
+
+  # GET /users
+  def index
+    @users = User.excluding(current_user).page(params[:page])
+    if params[:search].present?
+      @users = @users.search(params[:search])
+    end
+    authorize(@users)
+  end
+
+  def new
+    @user = User.new
+    authorize_user
+  end
+
+  def create
+    @user = User.new(user_params)
+    authorize_user
+    if @user.save
+      redirect_to users_path, notice: "User was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH/PUT /users/1
+  def update
+    if @user.update(user_params)
+      redirect_to users_path, notice: "User was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /users/1
+  def destroy
+    @user.destroy
+    redirect_to users_path, notice: "User was successfully deleted."
+  end
+
+  private
+
+  # Only allow a list of trusted parameters through.
+  def user_params
+    params.require(:user).permit(:email, :password, :role, :first_name, :last_name)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def authorize_user
+    authorize(@user)
+  end
+end

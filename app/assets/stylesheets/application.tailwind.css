@@ -32,7 +32,7 @@
 }
 
 .form-label {
-  @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
+  @apply inline-block text-sm font-medium text-gray-900 dark:text-white;
 }
 
 .form-input {
@@ -45,6 +45,10 @@
 
 .form-title {
   @apply text-xl text-gray-900 dark:text-white my-2;
+}
+
+.form-error {
+  @apply p-4 mb-4 text-center text-sm text-red-400 rounded-lg bg-red-200;
 }
 
 @layer components {
