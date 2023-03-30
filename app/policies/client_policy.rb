@@ -10,4 +10,8 @@ class ClientPolicy < ApplicationPolicy
   def destroy?
     edit?
   end
+
+  def index?
+    record.belongs_company?(user.company_id)
+  end
 end

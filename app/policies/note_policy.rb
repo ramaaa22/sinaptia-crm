@@ -1,6 +1,10 @@
 class NotePolicy < ApplicationPolicy
   def update?
-    user.admin? || record.user_id == user.id
+    (user.admin? || record.user_id == user.id) && record.client.belongs_company?(user.company_id)
+  end
+
+  def edit?
+    update?
   end
 
   def destroy?
@@ -8,6 +12,6 @@ class NotePolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    record.client.belongs_company?(user.company_id)
   end
 end
