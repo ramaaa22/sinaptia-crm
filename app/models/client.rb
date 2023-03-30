@@ -1,6 +1,6 @@
 class Client < ApplicationRecord
   include PgSearch::Model
-  include Share
+
   pg_search_scope :search, against: [:name, :email, :location], associated_against: {tags: [:name]}, using: {tsearch: {prefix: true}}
 
   has_many :notes
@@ -10,4 +10,8 @@ class Client < ApplicationRecord
   validates :name, :email, :location, presence: true
   validates :name, :email, uniqueness: {scope: :company_id}
   validates :email, email: true
+
+  def belongs_company?(id)
+    company.id == id
+  end
 end

@@ -7,7 +7,7 @@ class TagsController < ApplicationController
 
   # GET /tags
   def index
-    @tags = policy_scope(Tag).per_company(@company).page(params[:page])
+    @tags = policy_scope(Tag).where(company: @company).page(params[:page])
     if params[:search].present?
       @tags = @tags.search(params[:search])
     end

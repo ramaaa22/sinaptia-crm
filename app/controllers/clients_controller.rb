@@ -7,7 +7,7 @@ class ClientsController < ApplicationController
 
   # GET /clients
   def index
-    @clients = policy_scope(Client).per_company(@company).page(params[:page])
+    @clients = policy_scope(Client).where(company: @company).page(params[:page])
     if params[:search].present?
       @clients = @clients.search(params[:search])
     end
