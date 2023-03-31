@@ -12,6 +12,10 @@ class UserPolicy < ApplicationPolicy
   end
 
   def destroy?
-    edit?
+    edit? && !record.discarded?
+  end
+
+  def restore?
+    edit? && record.discarded?
   end
 end

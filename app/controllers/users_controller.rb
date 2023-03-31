@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edit update destroy]
-  before_action :authorize_user, only: %i[edit update destroy]
+  before_action :set_user, only: %i[edit update destroy restore]
+  before_action :authorize_user, only: %i[edit update destroy restore]
   after_action :verify_authorized
 
   # GET /users
@@ -38,8 +38,14 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+    @user.discard
     redirect_to users_path, notice: "User was successfully deleted."
+  end
+
+  # RESTORE /users/1
+  def restore
+    @user.undiscard
+    redirect_to users_path, notice: "User was successfully restored."
   end
 
   private
