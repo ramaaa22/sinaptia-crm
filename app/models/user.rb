@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include Discard::Model
   include PgSearch::Model
   pg_search_scope :search, against: [:email, :first_name, :last_name], using: {tsearch: {prefix: true}}
 
@@ -18,6 +19,9 @@ class User < ApplicationRecord
 
   def belongs_company?(id)
     company.id == id
+    
+  def active_for_authentication?
+    super && !discarded?
   end
 
   private
