@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include Discard::Model
   include PgSearch::Model
   pg_search_scope :search, against: [:email, :first_name, :last_name], using: {tsearch: {prefix: true}}
 
@@ -13,6 +14,10 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
   enum role: {default: 0, admin: 1}
+
+  def active_for_authentication?
+    super && !discarded?
+  end
 
   private
 

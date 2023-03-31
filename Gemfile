@@ -64,6 +64,9 @@ gem "pg_search"
 # Permissions
 gem "pundit"
 
+# Soft delete
+gem 'discard', '~> 1.2'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
