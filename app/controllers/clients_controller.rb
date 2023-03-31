@@ -1,13 +1,13 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[edit update destroy]
   before_action :authorize_client, only: %i[edit update destroy]
-  before_action :set_company, only: %i[index]
+  before_action :set_company
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
 
   # GET /clients
   def index
-    @clients = policy_scope(Client).per_company(@company).page(params[:page])
+    @clients = policy_scope(Client).where(company: @company).page(params[:page])
     
     if !@company.present?
       redirect_to companies_path
@@ -67,9 +67,5 @@ class ClientsController < ApplicationController
 
   def authorize_client
     authorize(@client)
-  end
-
-  def set_company
-    @company = current_user.company
   end
 end

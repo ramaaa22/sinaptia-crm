@@ -2,12 +2,13 @@ class NotesController < ApplicationController
   before_action :set_client
   before_action :set_note, only: %i[edit update destroy]
   before_action :authorize_note, only: %i[edit update destroy]
-  after_action :verify_authorized, except: :index
+  after_action :verify_authorized
   after_action :verify_policy_scoped, only: :index
 
   # GET /notes or /notes.json
   def index
     @notes = policy_scope(@client.notes).order("created_at DESC").page(params[:page])
+    authorize(@client)
   end
 
   # GET /notes/new
@@ -47,6 +48,8 @@ class NotesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_note
     @note = policy_scope(@client.notes).find(params[:id])
+  rescue ActiveRecord::RecordNotFound => e
+    redirect_to client_notes_path
   end
 
   # Only allow a list of trusted parameters through.

@@ -4,7 +4,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def edit?
-    super && user.id != record.id && !record.admin?
+    index? && user.id != record.id && !record.admin?
   end
 
   def update?

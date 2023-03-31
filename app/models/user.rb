@@ -16,6 +16,10 @@ class User < ApplicationRecord
 
   enum role: {default: 0, admin: 1}
 
+  def belongs_company?(id)
+    company.id == id
+  end
+
   private
 
   def domain_check

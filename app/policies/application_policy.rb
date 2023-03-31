@@ -6,19 +6,19 @@ class ApplicationPolicy
     @record = record
   end
 
-  def create?
-    user.admin?
-  end
-
   def new?
     create?
   end
 
-  def update?
-    create?
+  def create?
+    user.admin?
   end
 
   def edit?
+    create?
+  end
+
+  def update?
     create?
   end
 
