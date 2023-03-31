@@ -3,15 +3,13 @@ class User < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search, against: [:email, :first_name, :last_name], using: {tsearch: {prefix: true}}
 
-  APPROVED_DOMAINS = ["sinaptia.dev"]
-
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
   has_many :notes
   has_many :identities
   belongs_to :company
 
-  validates :email, presence: true, if: :domain_check
+  validates :email, presence: true, uniqueness: true
   validates :first_name, :last_name, presence: true
   validates :company, presence: true
 
