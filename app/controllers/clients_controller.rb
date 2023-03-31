@@ -1,7 +1,7 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[edit update destroy]
   before_action :authorize_client, only: %i[edit update destroy]
-  before_action :set_company, only: %i[index]
+  before_action :set_company
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
 

@@ -1,15 +1,16 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[edit update destroy]
   before_action :authorize_user, only: %i[edit update destroy]
+  before_action :set_company
   after_action :verify_authorized
 
   # GET /users
   def index
-    @users = User.excluding(current_user).page(params[:page])
+    @users = User.excluding(current_user).where(company: @company).page(params[:page])
     if params[:search].present?
       @users = @users.search(params[:search])
     end
-    authorize(@users)
+    authorize(User)
   end
 
   def new
@@ -18,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params.merge(company: @company))
     authorize_user
     if @user.save
       redirect_to users_path, notice: "User was successfully created."
