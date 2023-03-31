@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
-  before_action :set_client, only: %i[edit update destroy]
-  before_action :authorize_client, only: %i[edit update destroy]
+  before_action :set_company, only: %i[edit update destroy join]
+  before_action :authorize_company, only: %i[edit update destroy]
 
   # GET /companies
   def index
@@ -17,14 +17,29 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
 
     if @company.save
-      redirect_to companies_path, notice: "Company was successfully created."
+      current_user.update(company_id: @company.id)
+      redirect_to root_path, notice: "Company was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-    # Only allow a list of trusted parameters through.
-    def company_params
-      params.require(:company).permit(:name, :description)
+  def join
+    if current_user.update(company_id: @company.id)
+      redirect_to root_path, notice: "You've joined the company successfully!"
+    else
+      puts "User save failed with errors: #{current_user.errors.full_messages.join(', ')}"
+      redirect_to companies_path, alert: "Joining the company failed!"
     end
+  end
+
+  # Only allow a list of trusted parameters through.
+  def set_company
+    @company = Company.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def company_params
+    params.require(:company).permit(:name, :description)
+  end
 end

@@ -12,7 +12,11 @@
         <p class="font-medium"><%= company.name %></p>
         <p><%= company.description %></p>
       </div>
-      <%= link_to "Join", company, data: {turbo_method: :delete, turbo_confirm: 'Are you sure you want to join this workspace?'}, class: "btn block" %>
+      <% if current_user.company == company %>
+        <p>Joined</p>
+      <% else %>
+        <%= link_to "Join", join_company_path(company), data: {turbo_method: :put, turbo_confirm: 'Are you sure you want to join this workspace?'}, class: "btn block" %>
+      <% end %>
     </div>
     <% end %>
   </div>

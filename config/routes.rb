@@ -6,8 +6,15 @@ Rails.application.routes.draw do
   scope "/admin" do
     resources :users
   end
+  
   resources :tags
-  resources :companies
+  
+  resources :companies do
+    member do
+      put :join
+    end
+  end
+
   resources :clients do
     resources :notes
   end
