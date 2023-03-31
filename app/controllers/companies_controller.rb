@@ -17,7 +17,7 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
 
     if @company.save
-      current_user.update(company_id: @company.id)
+      current_user.update(company_id: @company.id, role: "admin")
       redirect_to root_path, notice: "Company was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -25,7 +25,7 @@ class CompaniesController < ApplicationController
   end
 
   def join
-    if current_user.update(company_id: @company.id)
+    if current_user.update(company: @company)
       redirect_to root_path, notice: "You've joined the company successfully!"
     else
       puts "User save failed with errors: #{current_user.errors.full_messages.join(', ')}"

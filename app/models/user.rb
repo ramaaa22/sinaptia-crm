@@ -19,7 +19,8 @@ class User < ApplicationRecord
 
   def belongs_company?(id)
     company.id == id
-    
+  end
+
   def active_for_authentication?
     super && !discarded?
   end
