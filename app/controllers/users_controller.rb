@@ -15,11 +15,12 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @companies = Company.all
     authorize_user
   end
 
   def create
-    @user = User.new(user_params.merge(company: @company))
+    @user = User.new(user_params.merge(company: @company))    
     authorize_user
     if @user.save
       redirect_to users_path, notice: "User was successfully created."

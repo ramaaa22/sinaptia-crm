@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: %i[edit update destroy join]
+  before_action :set_company
   before_action :authorize_company, only: %i[edit update destroy]
 
   # GET /companies
@@ -31,11 +31,6 @@ class CompaniesController < ApplicationController
       puts "User save failed with errors: #{current_user.errors.full_messages.join(', ')}"
       redirect_to companies_path, alert: "Joining the company failed!"
     end
-  end
-
-  # Only allow a list of trusted parameters through.
-  def set_company
-    @company = Company.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
