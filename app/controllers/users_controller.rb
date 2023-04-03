@@ -15,7 +15,6 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @companies = Company.all
     authorize_user
   end
 
