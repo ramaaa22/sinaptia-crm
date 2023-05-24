@@ -7,5 +7,6 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # Create an example user for testing (dev only)
-User.create! email: "admin@sinaptia.dev", password: "admin123", password_confirmation: "admin123", role: 1
-User.create! email: "default@sinaptia.dev", password: "default123", password_confirmation: "default123", role: 0
+sinaptia = Company.create! name: "Sinaptia", description: "Sinaptia"
+User.create! first_name: "Admin", last_name: "Admin", email: "admin@sinaptia.dev", password: "123456", password_confirmation: "123456", role: 1, company: sinaptia
+User.create! first_name: "Default", last_name: "Default", email: "default@sinaptia.dev", password: "123456", password_confirmation: "123456", role: 0, company: sinaptia

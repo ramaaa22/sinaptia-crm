@@ -1,6 +1,6 @@
 class ClientPolicy < ApplicationPolicy
   def index?
-    record.belongs_company?(user.company_id)
+    user.has_company?
   end
 
   def edit?

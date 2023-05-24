@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    omniauth_callbacks: "users/omniauth_callbacks"
+    omniauth_callbacks: "users/omniauth_callbacks",
+    registrations: "users/registrations",
+    sessions: "users/sessions"
   }
 
   scope "/admin" do
@@ -10,9 +12,9 @@ Rails.application.routes.draw do
       end
     end
   end
-  
+
   resources :tags
-  
+
   resources :companies do
     member do
       put :join

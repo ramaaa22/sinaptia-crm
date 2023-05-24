@@ -5,6 +5,7 @@ class CompaniesController < ApplicationController
   # GET /companies
   def index
     @companies = Company.order("name ASC")
+    authorize @companies
   end
 
   # GET /companies/new
@@ -21,15 +22,6 @@ class CompaniesController < ApplicationController
       redirect_to root_path, notice: "Company was successfully created."
     else
       render :new, status: :unprocessable_entity
-    end
-  end
-
-  def join
-    if current_user.update(company: @company)
-      redirect_to root_path, notice: "You've joined the company successfully!"
-    else
-      puts "User save failed with errors: #{current_user.errors.full_messages.join(', ')}"
-      redirect_to companies_path, alert: "Joining the company failed!"
     end
   end
 

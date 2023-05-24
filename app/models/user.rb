@@ -7,11 +7,10 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
   has_many :notes
   has_many :identities
-  belongs_to :company
+  belongs_to :company, optional: true
 
   validates :email, presence: true, uniqueness: true
   validates :first_name, :last_name, presence: true
-  validates :company, presence: true
 
   enum role: {default: 0, admin: 1}
 
@@ -21,6 +20,10 @@ class User < ApplicationRecord
 
   def active_for_authentication?
     super && !discarded?
+  end
+
+  def has_company?
+    !company.nil?
   end
 
   private
