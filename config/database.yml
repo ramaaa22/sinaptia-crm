@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: sinaptiacrm
-  username: sinaptiacrm
-  password: <%= ENV["SINAPTIA_CRM_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
