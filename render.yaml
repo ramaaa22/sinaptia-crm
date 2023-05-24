@@ -1,0 +1,18 @@
+databases:
+  - name: sinaptiacrm
+    databaseName: sinaptiacrm
+    user: sinaptiacrm
+
+services:
+  - type: web
+    name: sinaptiacrm
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: "postgres://sinaptiacrm:E87lAybAL3UjI6YvLPhYnmElRJcf2d0v@dpg-chn2fr2k728vrd9kj17g-a/sinaptiacrm"
+        fromDatabase:
+          name: sinaptiacrm
+          property: connectionString
+      - key: "f5b27ffbd117e82b2e11515a1157f5f6"
+        sync: false
