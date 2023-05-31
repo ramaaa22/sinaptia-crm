@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_company
-  before_action :set_user, only: %i[edit update destroy restore]
-  before_action :authorize_user, only: %i[edit update destroy restore]
+  before_action :set_user, only: %i[edit update destroy restore accept]
+  before_action :authorize_user, only: %i[edit update destroy restore accept]
   after_action :verify_authorized
 
   # GET /users
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params.merge(company: @company))
+    @user = User.new(user_params.merge(company: @company, accepted: true))
     authorize_user
     if @user.save
       redirect_to users_path, notice: "User was successfully created."
@@ -47,6 +47,12 @@ class UsersController < ApplicationController
   def restore
     @user.undiscard
     redirect_to users_path, notice: "User was successfully restored."
+  end
+
+  def accept
+    if @user.update(accepted: true)
+      redirect_to users_path, notice: "User was accepted in the company"
+    end
   end
 
   private

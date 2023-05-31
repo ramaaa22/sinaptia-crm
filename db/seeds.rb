@@ -8,5 +8,5 @@
 
 # Create an example user for testing (dev only)
 sinaptia = Company.create! name: "Sinaptia", description: "Sinaptia"
-User.create! first_name: "Admin", last_name: "Admin", email: "admin@sinaptia.dev", password: "123456", password_confirmation: "123456", role: 1, company: sinaptia
-User.create! first_name: "Default", last_name: "Default", email: "default@sinaptia.dev", password: "123456", password_confirmation: "123456", role: 0, company: sinaptia
+User.create! first_name: "Admin", last_name: "Admin", email: "admin@sinaptia.dev", password: "123456", password_confirmation: "123456", role: 1, company: sinaptia, accepted: true
+User.create! first_name: "Default", last_name: "Default", email: "default@sinaptia.dev", password: "123456", password_confirmation: "123456", role: 0, company: sinaptia, accepted: true

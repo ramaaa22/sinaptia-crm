@@ -4,7 +4,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def edit?
-    index? && user.id != record.id && !record.admin?
+    index? && user.id != record.id && !record.admin? && record.accepted?
   end
 
   def update?
@@ -17,5 +17,9 @@ class UserPolicy < ApplicationPolicy
 
   def restore?
     edit? && record.discarded?
+  end
+
+  def accept?
+    user.admin? && !record.accepted?
   end
 end

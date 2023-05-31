@@ -23,7 +23,7 @@ class User < ApplicationRecord
   end
 
   def has_company?
-    !company.nil?
+    !company.nil? && accepted
   end
 
   private

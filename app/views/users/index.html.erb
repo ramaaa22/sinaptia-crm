@@ -15,7 +15,7 @@
           <th scope="col" class="px-6 py-3">Email</th>
           <th scope="col" class="px-6 py-3">First Name</th>
           <th scope="col" class="px-6 py-3">Last Name</th>
-          <th scope="col" class="px-6 py-3">Admin</th>
+          <th scope="col" class="px-6 py-3">Role</th>
           <th scope="col" class="px-6 py-3"></th>
         </tr>
       </thead>
@@ -37,17 +37,23 @@
               <span class="tag m-0"><%= user.role %></span>
             </td>
             <td class="px-6 py-4">
-              <div class="flex flex-row">
-                <% if policy(user).edit? %>
-                  <%= link_to "Edit", edit_user_path(user), class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
-                <% end %>
-                <% if policy(user).destroy? %>
-                  <%= link_to "Delete", user_path(user), data: {turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this user?'}, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
-                <% end %>
-                <% if policy(user).restore? %>
-                  <%= link_to "Restore", restore_user_path(user), data: {turbo_method: :post, turbo_confirm: 'Are you sure you want to restore this user?'}, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
-                <% end %>
-              </div>
+              <% if user.accepted? %>
+                <div class="flex flex-row">
+                  <% if policy(user).edit? %>
+                    <%= link_to "Edit", edit_user_path(user), class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
+                  <% end %>
+                  <% if policy(user).destroy? %>
+                    <%= link_to "Delete", user_path(user), data: {turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this user?'}, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
+                  <% end %>
+                  <% if policy(user).restore? %>
+                    <%= link_to "Restore", restore_user_path(user), data: {turbo_method: :post, turbo_confirm: 'Are you sure you want to restore this user?'}, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
+                  <% end %>
+                </div>
+              <% else %>
+                <div class="flex flex-row">
+                  <%= link_to "Accept", accept_user_path(user), data: {turbo_method: :put, turbo_confirm: 'Are you sure you want to accept this user?'}, class: "mx-3 font-medium text-sinaptia-2 dark:text-sinaptia-2 hover:underline uppercase" %>
+                </div>
+              <% end %>
             </td>
           </tr>
         <% end %>
