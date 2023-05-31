@@ -29,6 +29,9 @@
       >
         <div class="px-4 py-3">
           <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400"><%= current_user && current_user.email %></span>
+          <% if current_user.has_company? %>
+            <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400"><%= current_user.company.name %></span>
+          <% end %>
         </div>
         <ul class="py-2" aria-labelledby="user-menu-button">
           <li>
